@@ -7,3 +7,29 @@
 // filteredArr should only contain the elements from the arr for which the expression fn(arr[i], i) evaluates to a truthy value. A truthy value is a value where Boolean(value) returns true.
 
 // Please solve it without the built-in Array.filter method.
+
+/**
+ * @param {number[]} arr
+ * @param {Function} fn
+ * @return {number[]}
+ */
+// var filter = function (arr, fn) {};
+
+const filteredArray = (arr, fn) => {
+  let from = 0,
+    to = 0;
+  while (from < arr.length) {
+    if (fn(arr[from])) {
+      arr[to] = arr[from];
+      to++;
+    }
+    from++;
+  }
+  arr.length = to;
+};
+
+var arr = [0, 10, 20, 30];
+const greaterThan10 = (n) => n > 10;
+filteredArray(arr, greaterThan10);
+
+console.log(arr);
