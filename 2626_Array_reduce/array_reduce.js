@@ -1,9 +1,6 @@
 // Given an integer array nums, a reducer function fn, and an initial value init, return the final result obtained by executing the fn function on each element of the array, sequentially, passing in the return value from the calculation on the preceding element.
-
 // This result is achieved through the following operations: val = fn(init, nums[0]), val = fn(val, nums[1]), val = fn(val, nums[2]), ... until every element in the array has been processed. The ultimate value of val is then returned.
-
 // If the length of the array is 0, the function should return init.
-
 // Please solve it without using the built-in Array.reduce method.
 
 // Example 1:
@@ -20,6 +17,7 @@
 // (3) + nums[2] = 6
 // (6) + nums[3] = 10
 // The final answer is 10.
+
 // Example 2:
 
 // Input:
@@ -42,3 +40,30 @@
 // init = 25
 // Output: 25
 // Explanation: For empty arrays, the answer is always init.
+
+const nums = [1, 2, 3, 4];
+
+// example 1
+let initialValue = 0;
+nums.forEach((nums) => {
+  initialValue += nums;
+});
+let example1 = initialValue;
+console.log("example 1 output", example1);
+
+// example 2
+let initialValue2 = 100;
+nums.forEach((nums) => {
+  initialValue2 += nums * nums;
+});
+let example2 = initialValue2;
+console.log("example 2 output", example2);
+
+// example 3
+let initialValue3 = 25;
+let numsEmpty = [];
+numsEmpty.forEach((numsEmpty) => {
+  initialValue3 += numsEmpty;
+});
+let example3 = initialValue3;
+console.log("example 3 output", example3);
