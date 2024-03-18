@@ -30,18 +30,23 @@
 // -109 <= arr[i] <= 109
 // fn returns a number
 
-const initialArray = [1, 2, 3];
-
-const increaseByOne = (array) => {
+const validateArray = (array) => {
   if (array.length < 0 || array.length > 1000) {
     throw new Error("Array length out of bounds");
   }
-
-  const increasedArray = [];
   for (let i = 0; i < array.length; i++) {
     if (array[i] < -109 || array[i] > 109) {
       throw new Error("Element value out of bounds");
     }
+  }
+};
+
+const initialArray = [1, 2, 3];
+
+const increaseByOne = (array) => {
+  validateArray(array);
+  const increasedArray = [];
+  for (let i = 0; i < array.length; i++) {
     increasedArray.push(array[i] + 1);
   }
   return increasedArray;
@@ -57,14 +62,9 @@ if (Array.isArray(result) && result.every(Number.isInteger)) {
 }
 
 const increaseByI = (array) => {
-  if (array.length < 0 || array.length > 1000) {
-    throw new Error("Array length out of bounds");
-  }
+  validateArray(array);
   const increasedArray2 = [];
   for (let i = 0; i < array.length; i++) {
-    if (array[i] < -109 || array[i] > 109) {
-      throw new Error("Element value out of bounds");
-    }
     increasedArray2.push(array[i] + i);
   }
   return increasedArray2;
@@ -82,14 +82,9 @@ if (Array.isArray(result2) && result2.every(Number.isInteger)) {
 const factorsOf10Array = [10, 20, 30];
 
 const everyIntegerAs42 = (array) => {
-  if (array.length < 0 || array.length > 1000) {
-    throw new Error("Array length out of bounds");
-  }
+  validateArray(array);
   const increasedArray3 = [];
   for (let i = 0; i < array.length; i++) {
-    if (array[i] < -109 || array[i] > 109) {
-      throw new Error("Element value out of bounds");
-    }
     increasedArray3.push(42);
   }
   return increasedArray3;
