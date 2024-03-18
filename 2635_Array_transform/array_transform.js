@@ -78,3 +78,32 @@ if (Array.isArray(result2) && result2.every(Number.isInteger)) {
     "Function did not return an array of integers,  try again but better"
   );
 }
+
+const factorsOf10Array = [10, 20, 30];
+
+const everyIntegerAs42 = (array) => {
+  if (array.length < 0 || array.length > 1000) {
+    throw new Error("Array length out of bounds");
+  }
+  const increasedArray3 = [];
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] < -109 || array[i] > 109) {
+      throw new Error("Element value out of bounds");
+    }
+    increasedArray3.push(42);
+  }
+  return increasedArray3;
+};
+
+const result3 = everyIntegerAs42(factorsOf10Array);
+
+// commented out the typeOf check since the result expected in [42, 42, 42] which returns in the console.
+
+// if (Array.isArray(result3) && result3.every(Number.isInteger)) {
+//   console.log(result3);
+// } else {
+//   console.log(
+//     "Function did not return an array of integers, try again but better"
+//   );
+// }
+console.log(result3);
