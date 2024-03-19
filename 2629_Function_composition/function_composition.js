@@ -43,3 +43,17 @@ const secondFunctions = [(y) => 10 * y, (y) => 10 * y, (y) => 10 * y],
 const secondComposedFunction = compose(secondFunctions);
 const secondOutput = secondComposedFunction(y);
 console.log("secondOutput", secondOutput);
+
+// Example 3:
+
+// Input: functions = [], x = 42
+// Output: 42
+// Explanation:
+// The composition of zero functions is the identity function
+
+const thirdFunctions = [],
+  z = 42;
+
+const thirdComposedFunction = compose(thirdFunctions);
+const thirdOutput = thirdComposedFunction(z);
+console.log("thirdOutput", thirdOutput);
