@@ -20,3 +20,115 @@
 // "getCallCount" - total call count: 1
 // memoizedSum(1, 2); // "call" - returns 3. sum() was called as (1, 2) was not seen before.
 // "getCallCount" - total call count: 2
+
+function memoize(fn) {
+  const cache = new Map();
+  let callCount = 0;
+  function memoized(...args) {
+    const key = JSON.stringify(args);
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    const result = fn(...args);
+    cache.set(key, result);
+    callCount++;
+    return result;
+  }
+
+  memoized.getCallCount = () => callCount;
+
+  return memoized;
+}
+
+const sum = (a, b) => a + b;
+const fib = (n) => (n <= 1 ? 1 : fib(n - 1) + fib(n - 2));
+const factorial = (n) => (n <= 1 ? 1 : n * factorial(n - 1));
+
+const actions = ["call", "call", "getCallCount", "call", "getCallCount"];
+const values = [[2, 2], [2, 2], [], [1, 2], []];
+
+const memoizedSum = memoize(sum);
+
+const output = actions.map((action, index) => {
+  switch (action) {
+    case "call":
+      return memoizedSum(...values[index]);
+    case "getCallCount":
+      return memoizedSum.getCallCount();
+    default:
+      return null;
+  }
+});
+
+console.log("output", output);
+
+// Example 2:
+
+// Input:
+// fnName = "factorial"
+// actions = ["call","call","call","getCallCount","call","getCallCount"]
+// values = [[2],[3],[2],[],[3],[]]
+// Output: [2,6,2,2,6,2]
+// Explanation:
+// const factorial = (n) => (n <= 1) ? 1 : (n * factorial(n - 1));
+// const memoFactorial = memoize(factorial);
+// memoFactorial(2); // "call" - returns 2.
+// memoFactorial(3); // "call" - returns 6.
+// memoFactorial(2); // "call" - returns 2. However factorial was not called because 2 was seen before.
+// "getCallCount" - total call count: 2
+// memoFactorial(3); // "call" - returns 6. However factorial was not called because 3 was seen before.
+// "getCallCount" - total call count: 2
+
+const secondActions = [
+  "call",
+  "call",
+  "call",
+  "getCallCount",
+  "call",
+  "getCallCount",
+];
+const secondValues = [[2], [3], [2], [], [3], []];
+
+const memoizedFactorial = memoize(factorial);
+
+const secondOutput = secondActions.map((action, index) => {
+  switch (action) {
+    case "call":
+      return memoizedFactorial(...secondValues[index]);
+    case "getCallCount":
+      return memoizedFactorial.getCallCount();
+    default:
+      return null;
+  }
+});
+
+console.log("secondOutput", secondOutput);
+
+// Example 3:
+
+// Input:
+// fnName = "fib"
+// actions = ["call","getCallCount"]
+// values = [[5],[]]
+// Output: [8,1]
+// Explanation:
+// fib(5) = 8 // "call"
+// "getCallCount" - total call count: 1
+
+const tertiaryActions = ["call", "getCallCount"];
+const tertiaryValues = [[5], []];
+
+const memoizedFib = memoize(fib);
+
+const tertiaryOutput = tertiaryActions.map((action, index) => {
+  switch (action) {
+    case "call":
+      return memoizedFib(...tertiaryValues[index]);
+    case "getCallCount":
+      return memoizedFib.getCallCount();
+    default:
+      return null;
+  }
+});
+
+console.log("tertiaryOutput", tertiaryOutput);
